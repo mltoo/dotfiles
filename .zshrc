@@ -102,3 +102,7 @@ source ~/.zprofile
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 bindkey -v '^?' backward-delete-char
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)

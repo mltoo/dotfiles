@@ -69,14 +69,33 @@ capabilities.textDocument.colorProvider = {
     dynamicRegistration = true
 }
 
-require("lspconfig").tailwindcss.setup({
-    on_attach = function(client, bufnr)
-        if client.server_capabilities.colorProvider then
-            require("document-color").buf_attach(bufnr)
-        end
-    end
+require('mason-lspconfig').setup({
+    handlers = {
+        lsp.default_setup,
+        tailwindcss = function()
+            require('lspconfig').tailwindcss.setup({
+                on_attach = function(client, bufnr)
+                    if client.server_capabilities.colorProvider then
+                        require("document-color").buf_attach(bufnr)
+                    end
+                end
+            })
+        end,
+        clangd = function()
+            require('lspconfig').clangd.setup({
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "-j", "8",
+                    "--header-insertion-decorators"
+                }
+            })
+        end,
+    }
 })
-
 
 cmp.setup({
     preselect = "item",

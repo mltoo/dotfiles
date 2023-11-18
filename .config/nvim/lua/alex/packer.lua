@@ -93,7 +93,10 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'mfussenegger/nvim-dap'
+        'mltoo/nvim-dap',
+        requires = {
+            { 'williamboman/mason.nvim' }
+        }
     }
 
     use {

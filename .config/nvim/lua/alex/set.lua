@@ -34,6 +34,10 @@ vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_bufsettings = 'noma nomod rnu nowrap ro nobl'
 
+vim.opt.laststatus = 3
+
+vim.opt.spell = true
+
 
 
 vim.cmd('filetype plugin on')
@@ -44,3 +48,10 @@ for type, icon in pairs(signs) do
 end
 
 --vim.o.pumblend = 20
+
+local monokai = require('monokai-pro.colorscheme').setup(require("monokai-pro.config").options.filter)
+
+vim.api.nvim_set_hl(0, 'winbarTitleEndmarker', { fg = monokai.base.magenta })
+vim.api.nvim_set_hl(0, 'winbarTitleText', { bg = monokai.base.magenta, fg = monokai.base.dimmed5, bold=true})
+
+vim.cmd[[set winbar=%=%#winbarTitleEndmarker#\%#winbarTitleText#\ %<%{expand('%')}\ %#winbarTitleEndmarker#\%#Normal#\ ]]
