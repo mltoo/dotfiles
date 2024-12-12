@@ -1,4 +1,5 @@
-local monokai = require('monokai-pro.colorscheme').setup(require("monokai-pro.config").options.filter)
+#local monokai = require('monokai-pro.colorscheme').setup(require("monokai-pro.config").options.filter)
+local monokai = require('monokai-pro.colorscheme').get("pro")
 local helper = require('monokai-pro.color_helper')
 
 require("monokai-pro").setup({

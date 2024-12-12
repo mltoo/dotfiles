@@ -1,4 +1,4 @@
-local monokai = require('monokai-pro.colorscheme').setup(require("monokai-pro.config").options.filter)
+local monokai = require('monokai-pro.colorscheme').get("pro")
 local dap, dapui = require("dap"), require("dapui")
 
 vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>", {})
@@ -40,7 +40,7 @@ mason_registry.refresh(function()
                 start_in_insert = false,
                 on_open = function (term)
                     print(vim.inspect(term))
-                    vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Esc>", "<C-c><cmd>quit<CR>", {noremap=true, silent=true})
+                    vim.api.nvim_buf_set_keymap(term.bufnr, "t", "<Esc>", "<C-c>", {noremap=true, silent=true})
                 end,
                 on_exit = function(term, job, exit_code, name)
                     if (exit_code == 0) then

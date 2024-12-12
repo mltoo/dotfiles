@@ -9,6 +9,9 @@ application/x-extension-shtml=firefox.desktop
 application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
+x-scheme-handler/beatsaver=BeatSaberModManager-url-beatsaver.desktop
+x-scheme-handler/modelsaber=BeatSaberModManager-url-modelsaber.desktop
+x-scheme-handler/bsplaylist=BeatSaberModManager-url-bsplaylist.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
