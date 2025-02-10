@@ -14,7 +14,7 @@ lsp.ensure_installed({
 	'tailwindcss',
 	'lemminx',
 	'yamlls',
-	'tsserver'
+	--'tsserver'
 })
 
 local cmp_select = { behavior = cmp.SelectBehavior.Select}

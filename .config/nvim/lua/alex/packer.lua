@@ -100,7 +100,10 @@ return require('packer').startup(function(use)
     }
 
     use {
-        'rcarriga/nvim-dap-ui'
+        'rcarriga/nvim-dap-ui',
+        requires = {
+            {'nvim-neotest/nvim-nio'}
+        }
     }
 
     use {
