@@ -1,4 +1,6 @@
-require("alex.remap")
 require("alex.set")
-require("alex.packer")
 
+require("alex.lazy")
+
+require("alex.remap")
+--require("alex.packer")

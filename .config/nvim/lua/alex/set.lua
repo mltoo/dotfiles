@@ -29,6 +29,7 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
@@ -49,9 +50,8 @@ end
 
 --vim.o.pumblend = 20
 
-local monokai = require('monokai-pro.colorscheme').get("pro")
 
-vim.api.nvim_set_hl(0, 'winbarTitleEndmarker', { fg = monokai.base.magenta })
-vim.api.nvim_set_hl(0, 'winbarTitleText', { bg = monokai.base.magenta, fg = monokai.base.dimmed5, bold=true})
+vim.o.exrc = true
+vim.cmd("au! BufNewFile,BufRead *.tpp set filetype=cpp")
 
-vim.cmd[[set winbar=%=%#winbarTitleEndmarker#\%#winbarTitleText#\ %<%{expand('%')}\ %#winbarTitleEndmarker#\%#Normal#\ ]]
+vim.cmd("set fsync")
