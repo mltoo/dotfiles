@@ -99,10 +99,10 @@ return {
                     'texlab',
                     'tailwindcss',
                     'lemminx',
-                    'yamlls'
+                    'yamlls',
+                    'ts_ls',
                 },
                 handlers = {
-
             --        lsp.default_setup,
                     tailwindcss = function()
                         require('lspconfig').tailwindcss.setup({
@@ -141,6 +141,7 @@ return {
                     end
                 }
             })
+            require('lspconfig').ts_ls.setup({})
             cmp.setup({
                 preselect = "item",
                 completion = {
