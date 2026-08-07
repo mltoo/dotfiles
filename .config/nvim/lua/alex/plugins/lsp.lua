@@ -12,7 +12,6 @@ return {
         },
         { "hrsh7th/nvim-cmp" },
         { "hrsh7th/cmp-nvim-lsp" },
-        { "L3MON4D3/LuaSnip" },
     },
         init = function()
             local cmp = require('cmp')
@@ -27,7 +26,6 @@ return {
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
                     end
                 },
                 window = {
@@ -42,7 +40,6 @@ return {
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "luasnip" },
                 })
             })
 
@@ -104,44 +101,42 @@ return {
                 },
                 handlers = {
             --        lsp.default_setup,
-                    tailwindcss = function()
-                        require('lspconfig').tailwindcss.setup({
-                            on_attach = function(client, bufnr)
-                                if client.server_capabilities.colorProvider then
-                                    require("document-color").buf_attach(bufnr)
-                                end
-                            end
-                        })
-                    end,
-                    clangd = function()
-                        require('lspconfig').clangd.setup({
-                            capabilities = capabilities,
-                            cmd = {
-                                "clangd",
-                                "--background-index",
-                                "--clang-tidy",
-                                "--header-insertion=iwyu",
-                                "-j", "8",
-                                "--header-insertion-decorators"
-                            }
-                        })
-                    end,
-                    lua_ls = function()
-                        require("lspconfig").lua_ls.setup({
-                            settings = {
-                                Lua = {
-                                    diagnostics = {
-                                        globals = {
-                                            "vim"
-                                        }
-                                    }
-                                }
-                            }
-                        })
-                    end
                 }
             })
-            require('lspconfig').ts_ls.setup({})
+
+            vim.lsp.config('tailwindcss',
+            {
+                on_attach = function(client, bufnr)
+                    if client.server_capabilities.colorProvider then
+                        require("document-color").buf_attach(bufnr)
+                    end
+                end
+            })
+            vim.lsp.config('clangd',
+            {
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "-j", "8",
+                    "--header-insertion-decorators"
+                }
+            })
+            vim.lsp.config('lua_ls',
+            {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = {
+                                "vim"
+                            }
+                        }
+                    }
+                }
+            })
+            -- require('lspconfig').ts_ls.setup({})
             cmp.setup({
                 preselect = "item",
                 completion = {

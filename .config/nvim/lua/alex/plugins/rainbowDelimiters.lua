@@ -1,25 +1,11 @@
 return {
     {
         "HiPhish/rainbow-delimiters.nvim",
+        dependencies={
+            'loctvl842/monokai-pro.nvim',
+        },
         config = function()
-            require('ibl').setup({
-                enabled=true,
-                indent = {
-                    char = '▏',
-                    highlight='Whitespace'
-                },
-                scope = {
-                    highlight = {
-                        "RainbowDelimiterYellow",
-                        "RainbowDelimiterBlue",
-                        "RainbowDelimiterOrange",
-                        "RainbowDelimiterGreen",
-                        "RainbowDelimiterViolet",
-                        "RainbowDelimiterCyan",
-                        "RainbowDelimiterRed",
-                    }
-                }
-            })
+            require('rainbow-delimiters.setup').setup({})
         end
     }
 }

@@ -1,6 +1,6 @@
 return {
     {
-        "mltoo/nvim-dap",
+        "mfussenegger/nvim-dap",
         dependencies = {
             "williamboman/mason.nvim",
             {
@@ -14,7 +14,7 @@ return {
             }
         },
         config = function()
-            local monokai = require('monokai-pro.colorscheme').get("pro")
+            local monokai_scheme = require('monokai-pro.theme').get_scheme()
             local dap, dapui = require("dap"), require("dapui")
 
             vim.keymap.set("n", "<F5>", ":lua require'dap'.continue()<CR>", {})
@@ -29,9 +29,9 @@ return {
             vim.keymap.set("n", "<leader>dr", ":lua require'dap'.repl.open()<CR>", {})
             vim.keymap.set("n", "<leader>d<tab>", ":lua require'dapui'.toggle()<CR>", {})
 
-            vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = monokai.base.red })
-            vim.api.nvim_set_hl(0, 'DapStopped', { fg = monokai.base.yellow })
-            vim.api.nvim_set_hl(0, 'DapBreakpointRejected', { fg = monokai.base.dimmed2 })
+            vim.api.nvim_set_hl(0, 'DapBreakpoint', { fg = monokai_scheme.base.red })
+            vim.api.nvim_set_hl(0, 'DapStopped', { fg = monokai_scheme.base.yellow })
+            vim.api.nvim_set_hl(0, 'DapBreakpointRejected', { fg = monokai_scheme.base.dimmed2 })
 
             vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
             vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected' })
@@ -82,20 +82,6 @@ return {
                     end
                 end
 
-                local command_callbacks = { function()
-                    return { 'test' }
-                end,
-                }
-                command_callbacks['shellCommand.execute'] = function(command, args)
-                    local lines = {}
-                    for line in string.gmatch(vim.fn.system(args["command"]), "[^\r\n]+") do
-                        table.insert(lines, line)
-                    end
-                    return lines
-                end
-
-                require('dap.ext.vscode').load_launchjs(nil, { codelldb = { 'cpp' }, cppdbg = { 'cpp' } },
-                    command_callbacks)
                 if not dap.configurations.cpp then
                     dap.configurations.cpp = {}
                 end
